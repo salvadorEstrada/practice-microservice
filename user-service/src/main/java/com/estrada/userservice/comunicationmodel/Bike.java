@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class Bike {
     private String brand;
     private String model;
-
+    //con faign
+    private int userId;
 }

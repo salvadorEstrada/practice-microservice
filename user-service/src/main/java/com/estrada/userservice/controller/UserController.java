@@ -3,6 +3,7 @@ package com.estrada.userservice.controller;
 import com.estrada.userservice.comunicationmodel.Bike;
 import com.estrada.userservice.comunicationmodel.Car;
 import com.estrada.userservice.entity.UserEntity;
+import com.estrada.userservice.feignclient.CarFeignClient;
 import com.estrada.userservice.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -17,6 +19,8 @@ public class UserController {
 
     @Autowired
     private UserServiceInterface userServiceInterface;
+
+
 
     @GetMapping()
     public ResponseEntity<?> listUsers(){
@@ -37,9 +41,9 @@ public class UserController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> createUser(@RequestBody UserEntity user){
+    public ResponseEntity<Car> createUser(@RequestBody UserEntity user){
         UserEntity newUser = userServiceInterface.createUser(user);
-        return  new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        return  new ResponseEntity(newUser, HttpStatus.CREATED);
     }
 
     //Comunicacion con el microservicio car por restTemplate
@@ -68,6 +72,31 @@ public class UserController {
         List<Bike> listBikes = userServiceInterface.listBike(userId);
         return ResponseEntity.ok(listBikes);
     }
+
+   @PostMapping("/createCar/{userId}")
+    public ResponseEntity<?> createCar(@PathVariable int userId,@RequestBody Car car){
+
+        if(userServiceInterface.getUserById(userId)==null)
+            return ResponseEntity.notFound().build();
+
+        Car newCar = userServiceInterface.createCar(userId,car);
+        return new ResponseEntity<>(newCar, HttpStatus.CREATED);
+   }
+
+   @PostMapping("/createbike/{userId}")
+    public ResponseEntity<?> createBike(@PathVariable int userId, @RequestBody Bike bike){
+       if(userServiceInterface.getUserById(userId)==null)
+           return ResponseEntity.notFound().build();
+
+        Bike newBike = userServiceInterface.createBike(userId, bike);
+        return new ResponseEntity<>(newBike, HttpStatus.CREATED);
+   }
+
+  @GetMapping("/getall/{userId}")
+    public ResponseEntity<Map<String, Object>> getUserAllVehicles(@PathVariable int userId){
+      Map<String, Object> getVehicles = userServiceInterface.getUsersAndVehicles(userId);
+      return ResponseEntity.ok(getVehicles);
+  }
 
 
 }

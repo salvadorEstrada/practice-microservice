@@ -21,14 +21,31 @@ repositories {
 	mavenCentral()
 }
 
+//pertenece a spring cloud (2020.0.3)
+ext {
+	set('springCloudVersion', "2020.0.3")
+}
+
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//anadir la dependencia de feign
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
+
+//Esto pertenece a spring cloud
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
 
 tasks.named('test') {
 	useJUnitPlatform()

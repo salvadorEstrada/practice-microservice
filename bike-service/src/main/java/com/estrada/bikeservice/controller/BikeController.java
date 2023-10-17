@@ -41,13 +41,10 @@ public class BikeController {
         return  new ResponseEntity<>(newBike, HttpStatus.CREATED);
     }
 
-
+    //Este es el mismo metodo en el faign client
     @GetMapping("/byuser/{userId}")
     public ResponseEntity<?> getUserId(@PathVariable int userId){
         List<Bike> bikes = bikeService.byUserId(userId);
-        if(bikes.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(bikes);
     }
 
