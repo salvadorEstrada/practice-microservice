@@ -48,7 +48,7 @@ public class UserController {
 
     //Comunicacion con el microservicio car por restTemplate
 
-    @GetMapping("cars/{userId}")
+   @GetMapping("cars/{userId}")
     public ResponseEntity<?> getCars(@PathVariable int userId){
 
         UserEntity user =  userServiceInterface.getUserById(userId);
@@ -62,7 +62,7 @@ public class UserController {
 
     //Comunicacion con el microservicio bike por restTemplate
 
-    @GetMapping("bikes/{userId}")
+   @GetMapping("bikes/{userId}")
     public ResponseEntity<?> getBikes(@PathVariable int userId){
         UserEntity user = userServiceInterface.getUserById(userId);
         if(user==null){

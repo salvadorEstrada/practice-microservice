@@ -50,15 +50,15 @@ public class UserServiceImpl implements UserServiceInterface{
 
 
 
-    @Override
+   @Override
     public List<Car> listCar(int userId){
-        List<Car> cars = restTemplateConfig.restTemplate().getForObject("http://localhost:8002/car/byuser/"+userId,List.class);
+        List<Car> cars = restTemplateConfig.restTemplate().getForObject("http://car-service/car/byuser/"+userId,List.class);
        return  cars;
     }
 
     @Override
     public List<Bike> listBike(int userId){
-        List<Bike> bikes = restTemplateConfig.restTemplate().getForObject("http://localhost:8003/bike/byuser/"+userId,List.class);
+        List<Bike> bikes = restTemplateConfig.restTemplate().getForObject("http://bike-service/bike/byuser/"+userId,List.class);
         return  bikes;
     }
 
