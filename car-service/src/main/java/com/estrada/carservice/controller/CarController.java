@@ -16,6 +16,7 @@ public class CarController {
     @Autowired
     private CarService carService;
 
+
     @GetMapping()
     public ResponseEntity<?> listCar(){
         List<Car> lisCars= carService.getAllCars();
@@ -40,13 +41,10 @@ public class CarController {
         return  new ResponseEntity<>(newCar, HttpStatus.CREATED);
     }
 
-
+    //Este es el mismo metodo en el feign client
     @GetMapping("/byuser/{userId}")
     public ResponseEntity<?> getUserId(@PathVariable int userId){
         List<Car> cars = carService.byUserId(userId);
-        if(cars.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(cars);
     }
 
