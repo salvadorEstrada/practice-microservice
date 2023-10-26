@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          default-label: getway
+          default-label: zipkin-sleuth
           uri: https://github.com/salvadorEstrada/practice-microservice
           search-paths: config-data
   application:

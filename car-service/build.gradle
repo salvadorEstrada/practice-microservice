@@ -33,8 +33,11 @@ dependencies {
 	//dependencia  cliente para buscar el cloud config server
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
-	////Conectar con eureka
+	//Conectar con eureka
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	//Zipking sleuth
+	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+	implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
